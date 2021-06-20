@@ -14,7 +14,7 @@ yarn global add create-react-app
 create-react-app ディレクトリ名
 ```
 
-# プロジェクト起動
+## プロジェクト起動
 
 ```
 yarn run start
