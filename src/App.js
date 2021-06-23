@@ -1,11 +1,16 @@
 import './App.css';
 
 function App() {
-  return (
-    <div>
-        <h1>Hello, world!</h1>;
-    </div>
+  const greeting = 'Hi!!!!';
+  const dom = (
+    <input
+      type="text"
+      onClick={() => {
+        console.log('I am Clicked!');
+      }}
+    />
   );
+  return dom;
 }
 
 export default App;
