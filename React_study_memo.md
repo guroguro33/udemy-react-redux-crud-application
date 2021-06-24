@@ -19,3 +19,10 @@ create-react-app ディレクトリ名
 ```
 yarn run start
 ```
+
+## JSX
+
+### React.Fragment
+
+- return dom の dom 内は１つのタグという制約があり、不要な div タグなどが発生するが、
+  <React.Fragment>タグで囲むとそれが不要になる
