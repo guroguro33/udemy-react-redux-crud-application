@@ -1,14 +1,19 @@
+import React from 'react';
 import './App.css';
 
 function App() {
-  const greeting = 'Hi!!!!';
+  //   const greeting = 'Hi!!!!';
   const dom = (
-    <input
-      type="text"
-      onClick={() => {
-        console.log('I am Clicked!');
-      }}
-    />
+    <React.Fragment>
+      <label htmlFor="bar">bar</label>
+      <input
+        type="text"
+        id="bar"
+        onChange={() => {
+          console.log('I am Clicked!');
+        }}
+      />
+    </React.Fragment>
   );
   return dom;
 }
