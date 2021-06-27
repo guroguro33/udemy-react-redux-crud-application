@@ -83,3 +83,20 @@ User.defaultProps = {
   age: 1,
 };
 ```
+
+## propTypes
+
+- 型判定を行う。コンパイルエラーにはならないが、コンソールエラーを出力する
+
+```javascript
+// importする
+import PropTypes from 'prop-types';
+
+// propsTypesを用いた型チェックを設定
+User.propTypes = {
+  // 文字列型
+  name: PropTypes.string,
+  // 数値型、かつ必須
+  age: PropTypes.number.isRequired,
+};
+```

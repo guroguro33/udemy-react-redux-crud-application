@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './App.css';
 
 // Functionコンポーネント
@@ -13,7 +14,7 @@ function App() {
       age: 5,
     },
     {
-      name: 'Noname',
+      name: 'jiro',
     },
   ];
   const dom = (
@@ -36,9 +37,11 @@ const User = (props) => {
   );
 };
 
-// 子コンポーネントのデフォルト値を設定する
-User.defaultProps = {
-  age: 1,
+// propsTypesを用いた型チェックを設定
+User.propTypes = {
+  name: PropTypes.string,
+  // 数値型、かつ必須
+  age: PropTypes.number.isRequired,
 };
 
 export default App;
