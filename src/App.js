@@ -1,47 +1,36 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import './App.css';
 
 // Functionコンポーネント
 function App() {
-  const profiles = [
-    {
-      name: 'Taro',
-      age: 10,
-    },
-    {
-      name: 'Hanako',
-      age: 5,
-    },
-    {
-      name: 'jiro',
-    },
-  ];
-  const dom = (
-    <React.Fragment>
-      {/* 親コンポーネントで変数propsを渡す */}
-      {profiles.map((profile, index) => {
-        return <User name={profile.name} age={profile.age} key={index} />;
-      })}
-    </React.Fragment>
-  );
+  // Counterインスタンスを生成
+  const dom = <Counter></Counter>;
   return dom;
 }
 
-// 子コンポーネント propsで親の変数を受け取る
-const User = (props) => {
-  return (
-    <div>
-      Hi!, I am {props.name}, and {props.age} years old!
-    </div>
-  );
-};
+// コンポーネントクラスを継承したCounterクラスを生成
+class Counter extends Component {
+  // propsを受け取り、コンストラクターを実行
+  constructor(props) {
+    super(props);
+    this.state = { count: 0 };
+  }
 
-// propsTypesを用いた型チェックを設定
-User.propTypes = {
-  name: PropTypes.string,
-  // 数値型、かつ必須
-  age: PropTypes.number.isRequired,
-};
+  handlePlusButton = () => {
+    this.setState({ count: this.state.count + 1 });
+  };
+  handleMinusButton = () => {
+    this.setState({ count: this.state.count - 1 });
+  };
+  render() {
+    return (
+      <React.Fragment>
+        <div>count: {this.state.count}</div>
+        <button onClick={this.handlePlusButton}>+1</button>
+        <button onClick={this.handleMinusButton}>-1</button>
+      </React.Fragment>
+    );
+  }
+}
 
 export default App;
