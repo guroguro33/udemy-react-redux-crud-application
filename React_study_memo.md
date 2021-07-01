@@ -160,7 +160,7 @@ yarn add redux react-redux
 - その中に index.js を作成
 - action 内は type インデックスを持ったユニークな値を持つインデックス
 ```javascript
-// action createrを生成してexportする
+// action creatorを生成してexportする
 export const INCREMENT = 'INCREMENT'
 export const DECREMENT = 'DECREMENT'
 

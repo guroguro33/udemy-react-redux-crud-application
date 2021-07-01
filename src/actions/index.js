@@ -1,4 +1,4 @@
-// action createrを生成する
+// action creatorを生成する
 export const INCREMENT = 'INCREMENT'
 export const DECREMENT = 'DECREMENT'
 
