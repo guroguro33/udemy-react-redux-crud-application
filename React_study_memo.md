@@ -145,3 +145,30 @@ class Counter extends Component {
 
 export default App;
 ```
+
+## redux
+
+### インストール
+
+```javascript
+yarn add redux react-redux
+```
+
+### action
+
+- ソース内に src/actions ディレクトリ生成
+- その中に index.js を作成
+- action 内は type インデックスを持ったユニークな値を持つインデックス
+```javascript
+// action createrを生成してexportする
+export const INCREMENT = 'INCREMENT'
+export const DECREMENT = 'DECREMENT'
+
+export const increment = () => ({
+  type: 'INCREMENT',
+})
+
+export const decrement = () => ({
+  type: 'DECREMENT',
+})
+```
