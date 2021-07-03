@@ -151,6 +151,7 @@ export default App;
 ### インストール
 
 ```javascript
+// reduxとreact-reduxの２つをインストール
 yarn add redux react-redux
 ```
 
@@ -171,4 +172,77 @@ export const increment = () => ({
 export const decrement = () => ({
   type: 'DECREMENT',
 })
+```
+
+### reducer
+- ソース内にsrc/reducersディレクトリを作成
+- ディレクト内にindex.jsと今回はcount.jsを作成
+```javascript
+// index.js
+// action creatorを生成する
+export const INCREMENT = 'INCREMENT'
+export const DECREMENT = 'DECREMENT'
+
+export const increment = () => ({
+  type: 'INCREMENT',
+})
+
+export const decrement = () => ({
+  type: 'DECREMENT',
+})
+```
+```javascript
+// count.js
+// 作成したactionをimportする
+import { INCREMENT, DECREMENT } from '../actions'
+
+// 初期値を定義
+const initialState = { value: 0 }
+
+// export defaultでaction.typeに応じた動きを記述
+export default (state = initialState, action) => {
+  switch (action.type) {
+    case INCREMENT:
+      return { value: state.value + 1 }
+    case DECREMENT:
+      return { value: state.value - 1 }
+    default:
+      return state
+  }
+}
+
+```
+### store
+- index.jsに準備する
+- コメント箇所が作成部分
+```javascript
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+// store使用のため、createStoreとProviderをimportする
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+
+import './index.css'
+// 作成したreducerをimport
+import reducer from './reducers'
+// App.jsをcomponentsディレクトリに入れて、見通しをよくする
+import App from './components/App'
+import reportWebVitals from './reportWebVitals'
+
+ReactDOM.render(
+  <React.StrictMode>
+    {/* Providerを呼んで、storeを渡す */}
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById('root')
+)
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals()
+
 ```
