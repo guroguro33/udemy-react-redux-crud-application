@@ -230,6 +230,9 @@ import reducer from './reducers'
 import App from './components/App'
 import reportWebVitals from './reportWebVitals'
 
+// reducerをstoreに入れる
+const store = createStore(reducer)
+
 ReactDOM.render(
   <React.StrictMode>
     {/* Providerを呼んで、storeを渡す */}
