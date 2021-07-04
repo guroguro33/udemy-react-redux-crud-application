@@ -145,3 +145,152 @@ class Counter extends Component {
 
 export default App;
 ```
+
+## redux
+
+### インストール
+
+```javascript
+// reduxとreact-reduxの２つをインストール
+yarn add redux react-redux
+```
+
+### action
+
+- ソース内に src/actions ディレクトリ生成
+- その中に index.js を作成
+- action 内は type インデックスを持ったユニークな値を持つインデックス
+```javascript
+// action creatorを生成してexportする
+export const INCREMENT = 'INCREMENT'
+export const DECREMENT = 'DECREMENT'
+
+export const increment = () => ({
+  type: 'INCREMENT',
+})
+
+export const decrement = () => ({
+  type: 'DECREMENT',
+})
+```
+
+### reducer
+- ソース内にsrc/reducersディレクトリを作成
+- ディレクト内にindex.jsと今回はcount.jsを作成
+```javascript
+// index.js
+// action creatorを生成する
+export const INCREMENT = 'INCREMENT'
+export const DECREMENT = 'DECREMENT'
+
+export const increment = () => ({
+  type: 'INCREMENT',
+})
+
+export const decrement = () => ({
+  type: 'DECREMENT',
+})
+```
+```javascript
+// count.js
+// 作成したactionをimportする
+import { INCREMENT, DECREMENT } from '../actions'
+
+// 初期値を定義
+const initialState = { value: 0 }
+
+// export defaultでaction.typeに応じた動きを記述
+export default (state = initialState, action) => {
+  switch (action.type) {
+    case INCREMENT:
+      return { value: state.value + 1 }
+    case DECREMENT:
+      return { value: state.value - 1 }
+    default:
+      return state
+  }
+}
+
+```
+### store
+- index.jsに準備する
+- コメント箇所が作成部分
+```javascript
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+// store使用のため、createStoreとProviderをimportする
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+
+import './index.css'
+// 作成したreducerをimport
+import reducer from './reducers'
+// App.jsをcomponentsディレクトリに入れて、見通しをよくする
+import App from './components/App'
+import reportWebVitals from './reportWebVitals'
+
+// reducerをstoreに入れる
+const store = createStore(reducer)
+
+ReactDOM.render(
+  <React.StrictMode>
+    {/* Providerを呼んで、storeを渡す */}
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById('root')
+)
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals()
+
+```
+
+### connectでstateとactionsとの関連を行う
+- stateとactionをコンポーネントのpropsに関連づける
+```javascript
+import React, { Component } from 'react'
+import './App.css'
+// connect関数をimportする
+import { connect } from 'react-redux'
+
+// actionsをimportする
+import { increment, decrement } from '../actions'
+
+// コンポーネントクラスを継承したCounterクラスを生成
+class App extends Component {
+  render() {
+    const props = this.props
+    console.log(props)
+    console.log(state)
+    return (
+      <React.Fragment>
+        <div>value: {props.value}</div>
+        <button onClick={props.increment}>+1</button>
+        <button onClick={props.decrement}>-1</button>
+      </React.Fragment>
+    )
+  }
+}
+// stateとactionをコンポーネントのpropsに関連づける
+// stateから今回必要なvalueをキーにして返す
+const mapStateToProps = (state) => ({ value: state.count.value })
+
+// actionをpropsにdispatchする
+// const mapDispatchToProps = (dispatch) => ({
+//   // increment関数とdecrement関数に該当のactionをdispatchして実行できる
+//   increment: () => dispatch(increment()),
+//   decrement: () => dispatch(decrement()),
+// })
+
+// 省略記法
+const mapDispatchToProps = { increment, decrement }
+
+// connect関数で、以下２定数を引数のAppにコネクトする
+export default connect(mapStateToProps, mapDispatchToProps)(App)
+
+```
