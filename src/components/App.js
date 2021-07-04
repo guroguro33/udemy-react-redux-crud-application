@@ -11,7 +11,6 @@ class App extends Component {
   render() {
     const props = this.props
     console.log(props)
-    console.log(state)
     return (
       <React.Fragment>
         <div>value: {props.value}</div>
