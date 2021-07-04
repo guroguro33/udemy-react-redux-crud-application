@@ -17,7 +17,7 @@ const store = createStore(reducer)
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* Providerを呼んで、storeを渡す */}
+    {/* Providerを呼んで、storeを渡す。これでProvider内の全コンポーネントで使用可能 */}
     <Provider store={store}>
       <App />
     </Provider>

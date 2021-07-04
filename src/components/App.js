@@ -1,36 +1,39 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from 'react'
+import './App.css'
+// connect関数をimportする
+import { connect } from 'react-redux'
 
-// Functionコンポーネント
-function App() {
-  // Counterインスタンスを生成
-  const dom = <Counter></Counter>;
-  return dom;
-}
+// actionsをimportする
+import { increment, decrement } from '../actions'
 
 // コンポーネントクラスを継承したCounterクラスを生成
-class Counter extends Component {
-  // propsを受け取り、コンストラクターを実行
-  constructor(props) {
-    super(props);
-    this.state = { count: 0 };
-  }
-
-  handlePlusButton = () => {
-    this.setState({ count: this.state.count + 1 });
-  };
-  handleMinusButton = () => {
-    this.setState({ count: this.state.count - 1 });
-  };
+class App extends Component {
   render() {
+    const props = this.props
+    console.log(props)
+    console.log(state)
     return (
       <React.Fragment>
-        <div>count: {this.state.count}</div>
-        <button onClick={this.handlePlusButton}>+1</button>
-        <button onClick={this.handleMinusButton}>-1</button>
+        <div>value: {props.value}</div>
+        <button onClick={props.increment}>+1</button>
+        <button onClick={props.decrement}>-1</button>
       </React.Fragment>
-    );
+    )
   }
 }
+// stateとactionをコンポーネントのpropsに関連づける
+// stateから今回必要なvalueをキーにして返す
+const mapStateToProps = (state) => ({ value: state.count.value })
 
-export default App;
+// actionをpropsにdispatchする
+// const mapDispatchToProps = (dispatch) => ({
+//   // increment関数とdecrement関数に該当のactionをdispatchして実行できる
+//   increment: () => dispatch(increment()),
+//   decrement: () => dispatch(decrement()),
+// })
+
+// 省略記法
+const mapDispatchToProps = { increment, decrement }
+
+// connect関数で、以下２定数を引数のAppにコネクトする
+export default connect(mapStateToProps, mapDispatchToProps)(App)
