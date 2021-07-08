@@ -8,8 +8,8 @@ import { Provider } from 'react-redux'
 import './index.css'
 // 作成したreducerをimport
 import reducer from './reducers'
-// App.jsをcomponentsディレクトリに入れて、見通しをよくする
-import App from './components/App'
+// EventsIndex.jsをcomponentsディレクトリに入れて、見通しをよくする
+import EventsIndex from './components/events_index'
 import reportWebVitals from './reportWebVitals'
 
 // reducerをstoreに入れる
@@ -19,7 +19,7 @@ ReactDOM.render(
   <React.StrictMode>
     {/* Providerを呼んで、storeを渡す。これでProvider内の全コンポーネントで使用可能 */}
     <Provider store={store}>
-      <App />
+      <EventsIndex />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

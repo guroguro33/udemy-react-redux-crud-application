@@ -7,7 +7,13 @@ import { connect } from 'react-redux'
 import { increment, decrement } from '../actions'
 
 // コンポーネントクラスを継承したCounterクラスを生成
-class App extends Component {
+class EventsIndex extends Component {
+  // マウント時に実行されるコールバック
+  componentDidMount() {
+    console.log('hi!')
+    this.props.readEvents()
+  }
+
   render() {
     const props = this.props
     console.log(props)
@@ -32,7 +38,7 @@ const mapStateToProps = (state) => ({ value: state.count.value })
 // })
 
 // 省略記法
-const mapDispatchToProps = { increment, decrement }
+const mapDispatchToProps = { readEvents }
 
-// connect関数で、以下２定数を引数のAppにコネクトする
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+// connect関数で、以下２定数を引数のEventsIndexにコネクトする
+export default connect(mapStateToProps, mapDispatchToProps)(EventsIndex)
