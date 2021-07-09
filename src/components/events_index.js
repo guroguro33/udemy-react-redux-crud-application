@@ -4,13 +4,12 @@ import './App.css'
 import { connect } from 'react-redux'
 
 // actionsをimportする
-import { increment, decrement } from '../actions'
+import { readEvents } from '../actions'
 
 // コンポーネントクラスを継承したCounterクラスを生成
 class EventsIndex extends Component {
   // マウント時に実行されるコールバック
   componentDidMount() {
-    console.log('hi!')
     this.props.readEvents()
   }
 
@@ -28,7 +27,7 @@ class EventsIndex extends Component {
 }
 // stateとactionをコンポーネントのpropsに関連づける
 // stateから今回必要なvalueをキーにして返す
-const mapStateToProps = (state) => ({ value: state.count.value })
+const mapStateToProps = (state) => ({})
 
 // actionをpropsにdispatchする
 // const mapDispatchToProps = (dispatch) => ({
