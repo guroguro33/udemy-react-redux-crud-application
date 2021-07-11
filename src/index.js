@@ -2,8 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 // store使用のため、createStoreとProviderをimportする
-import { createStore } from 'redux'
+// redux-thunkはミドルウエアのため、applyMiddlewareをimportする
+import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
+
+// redux thunkはactionの代わりに関数を返すことができる
+import thunk from 'redux-thunk'
 
 import './index.css'
 // 作成したreducerをimport
@@ -13,7 +17,9 @@ import EventsIndex from './components/events_index'
 import reportWebVitals from './reportWebVitals'
 
 // reducerをstoreに入れる
-const store = createStore(reducer)
+// applyMiddlewareの引数にthunkを入れて、createStoreを呼び出す
+const store = createStore(reducer, applyMiddleware(thunk))
+console.log(store)
 
 ReactDOM.render(
   <React.StrictMode>
