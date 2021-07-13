@@ -19,7 +19,7 @@ import reportWebVitals from './reportWebVitals'
 // reducerをstoreに入れる
 // applyMiddlewareの引数にthunkを入れて、createStoreを呼び出す
 const store = createStore(reducer, applyMiddleware(thunk))
-console.log(store)
+// console.log(store)
 
 ReactDOM.render(
   <React.StrictMode>
