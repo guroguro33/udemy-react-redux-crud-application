@@ -3,6 +3,8 @@ import './App.css'
 // connect関数をimportする
 import { connect } from 'react-redux'
 import _ from 'lodash'
+// リンク作成にreact-router-domを使用
+import { Link } from 'react-router-dom'
 
 // actionsをimportする
 import { readEvents } from '../actions'
@@ -27,17 +29,21 @@ class EventsIndex extends Component {
 
   render() {
     return (
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>TITLE</th>
-            <th>BODY</th>
-          </tr>
-        </thead>
-        {/* renderEventsメソッドで内容を記述する */}
-        <tbody>{this.renderEvents()}</tbody>
-      </table>
+      <React.Fragment>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>TITLE</th>
+              <th>BODY</th>
+            </tr>
+          </thead>
+          {/* renderEventsメソッドで内容を記述する */}
+          <tbody>{this.renderEvents()}</tbody>
+        </table>
+
+        <Link to="/events/new">New Event</Link>
+      </React.Fragment>
     )
   }
 }
