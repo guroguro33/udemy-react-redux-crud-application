@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import './App.css'
 import { connect } from 'react-redux'
 // redux-formに必要なメソッド
-import { Field, formValueSelector, reduxForm } from 'redux-form'
+// import { Field, formValueSelector, reduxForm } from 'redux-form'
+import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router-dom'
 import { div } from 'prelude-ls'
 
@@ -37,7 +38,8 @@ class EventsNew extends Component {
   }
 
   render() {
-    const { handleSubmit } = this.props
+    // submitの非活性にpristineを使用、連打防止にsubmitting（）reduxFormの機能
+    const { handleSubmit, pristine, submitting } = this.props
 
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
@@ -51,7 +53,7 @@ class EventsNew extends Component {
           </div>
 
           <div>
-            <input type="submit" value="Submit" disabled={false} />
+            <input type="submit" value="Submit" disabled={pristine || submitting} />
             <Link to="/">Cancel</Link>
           </div>
         </div>
