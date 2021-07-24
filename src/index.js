@@ -14,17 +14,22 @@ import './index.css'
 import reducer from './reducers'
 // EventsIndex.jsをcomponentsディレクトリに入れて、見通しをよくする
 import EventsIndex from './components/events_index'
-
 // EventsNewを用意し、入力ページのコンポーネントを作成
 import EventsNew from './components/events_new'
+// EventsShowを用意し、編集ページのコンポーネントを作成
+import EventsShow from './components/events_show'
 
 import reportWebVitals from './reportWebVitals'
 // routerを使う場合に必要
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
+// reduxのデバッグツール
+import { composeWithDevTools } from 'redux-devtools-extension'
 
 // reducerをstoreに入れる
 // applyMiddlewareの引数にthunkを入れて、createStoreを呼び出す
-const store = createStore(reducer, applyMiddleware(thunk))
+const enhancer =
+  process.env.NODE_ENV === 'development' ? composeWithDevTools(applyMiddleware(thunk)) : applyMiddleware(thunk)
+const store = createStore(reducer, enhancer)
 // console.log(store)
 
 ReactDOM.render(
@@ -33,8 +38,12 @@ ReactDOM.render(
     <Provider store={store}>
       <BrowserRouter>
         <Switch>
-          <Route exact path="/events/new" component={EventsNew} />
+          {/* exactは完全一致の条件をつけるもので、より厳しくなる */}
+          {/* 動的な変数には:をつける */}
+          <Route path="/events/new" component={EventsNew} />
+          <Route path="/events/:id" component={EventsShow} />
           <Route exact path="/" component={EventsIndex} />
+          <Route exact path="/events" component={EventsIndex} />
         </Switch>
       </BrowserRouter>
     </Provider>
