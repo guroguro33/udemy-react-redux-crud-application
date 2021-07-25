@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { READ_EVENTS, DELETE_EVENT } from '../actions'
+import { READ_EVENTS, READ_EVENT, DELETE_EVENT } from '../actions'
 
 const events = (events = {}, action) => {
   // actionのdispatchの条件分岐

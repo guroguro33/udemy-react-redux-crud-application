@@ -1,6 +1,7 @@
 import axios from 'axios'
 // action creatorを生成する
 export const READ_EVENTS = 'READ_EVENTS'
+export const READ_EVENT = 'READ_EVENT'
 export const CREATE_EVENT = 'CREATE_EVENT'
 export const DELETE_EVENT = 'DELETE_EVENT'
 
@@ -18,6 +19,12 @@ export const postEvent = (values) => async (dispatch) => {
   const response = await axios.post(`${ROOT_URL}/events${QUERYSTRING}`, values)
   // console.log(response)
   dispatch({ type: CREATE_EVENT, response })
+}
+
+export const getEvent = (id) => async (dispatch) => {
+  const response = await axios.get(`${ROOT_URL}/events/${id}${QUERYSTRING}`)
+  console.log(response)
+  dispatch({ type: READ_EVENT, response })
 }
 
 export const deleteEvent = (id) => async (dispatch) => {
