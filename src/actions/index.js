@@ -23,7 +23,7 @@ export const postEvent = (values) => async (dispatch) => {
 
 export const getEvent = (id) => async (dispatch) => {
   const response = await axios.get(`${ROOT_URL}/events/${id}${QUERYSTRING}`)
-  console.log(response)
+  // console.log(response)
   dispatch({ type: READ_EVENT, response })
 }
 
