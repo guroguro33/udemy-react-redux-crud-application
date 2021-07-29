@@ -24,6 +24,8 @@ import reportWebVitals from './reportWebVitals'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 // reduxのデバッグツール
 import { composeWithDevTools } from 'redux-devtools-extension'
+// material-ui
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 // reducerをstoreに入れる
 // applyMiddlewareの引数にthunkを入れて、createStoreを呼び出す
@@ -33,21 +35,23 @@ const store = createStore(reducer, enhancer)
 // console.log(store)
 
 ReactDOM.render(
-  <React.StrictMode>
-    {/* Providerを呼んで、storeを渡す。これでProvider内の全コンポーネントで使用可能 */}
-    <Provider store={store}>
-      <BrowserRouter>
-        <Switch>
-          {/* exactは完全一致の条件をつけるもので、より厳しくなる */}
-          {/* 動的な変数には:をつける */}
-          <Route path="/events/new" component={EventsNew} />
-          <Route path="/events/:id" component={EventsShow} />
-          <Route exact path="/" component={EventsIndex} />
-          <Route exact path="/events" component={EventsIndex} />
-        </Switch>
-      </BrowserRouter>
-    </Provider>
-  </React.StrictMode>,
+  <MuiThemeProvider>
+    <React.StrictMode>
+      {/* Providerを呼んで、storeを渡す。これでProvider内の全コンポーネントで使用可能 */}
+      <Provider store={store}>
+        <BrowserRouter>
+          <Switch>
+            {/* exactは完全一致の条件をつけるもので、より厳しくなる */}
+            {/* 動的な変数には:をつける */}
+            <Route path="/events/new" component={EventsNew} />
+            <Route path="/events/:id" component={EventsShow} />
+            <Route exact path="/" component={EventsIndex} />
+            <Route exact path="/events" component={EventsIndex} />
+          </Switch>
+        </BrowserRouter>
+      </Provider>
+    </React.StrictMode>
+  </MuiThemeProvider>,
   document.getElementById('root')
 )
 
